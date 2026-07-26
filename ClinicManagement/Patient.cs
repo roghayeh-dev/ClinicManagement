@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ClinicManagement
+﻿namespace ClinicManagement
 {
     public sealed class Patient : Person
     {

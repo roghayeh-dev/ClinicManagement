@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace ClinicManagement
+﻿namespace ClinicManagement
 {
     public class Doctor : Person
     {

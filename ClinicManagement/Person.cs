@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ClinicManagement
+﻿namespace ClinicManagement
 {
     public class Person
     {
@@ -22,11 +16,6 @@ namespace ClinicManagement
             {
                 return FirstName + " " + LastName;
             }
-        }
-
-        public void Hello()
-        {
-            var v = Validate();
         }
 
         public virtual Result Validate()

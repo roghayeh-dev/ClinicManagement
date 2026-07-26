@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ClinicManagement
@@ -18,18 +11,6 @@ namespace ClinicManagement
         }
         private void FrmStarter_Load(object sender, EventArgs e)
         {
-            var p = new Doctor("1010", "hasan", "hasani");
-            p.Hello();
-            var b = new Patient("ali", "alavi");
-            //var doctor = new Doctor("123456");
-
-
-            //var doctor2 = new Doctor("123456", "14655");
-
-
-            //var p = new Person();
-
-
         }
         private void button1_Click(object sender, EventArgs e)
         {

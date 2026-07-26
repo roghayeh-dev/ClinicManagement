@@ -1,35 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace ClinicManagement
 {
     internal class DoctorManager
     {
         private static List<Doctor> _doctors = new List<Doctor>();
-        int? i = null;
 
         public List<Doctor> GetDoctors()
         {
-
-            //int[] a;
-            //int j = i ?? 5;
-            //if (i.HasValue)
-            //{
-
-            //}
-            //if (i != null)
-            //{
-
-            //}
-            //if (i == null)
-            //{
-            //    j = 5;
-            //}
-            //else
-            //{
-            //    j = i.Value;
-            //}
-
             return _doctors;
         }
 
