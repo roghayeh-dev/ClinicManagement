@@ -20,6 +20,7 @@ namespace ClinicManagement
         {
             this.doctor = doctor;
             InitializeComponent();
+            _doctor = doctor;
         }
 
         private void btnSave_Click(object sender, EventArgs e)

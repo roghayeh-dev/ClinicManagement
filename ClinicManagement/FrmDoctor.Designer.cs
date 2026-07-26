@@ -36,7 +36,7 @@
             this.txtName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            
             this.SuspendLayout();
             // 
             // btnSave
@@ -138,7 +138,7 @@
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtMedicalCouncilNumber);
-            this.Controls.Add(this.label4);
+           
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtLastName);
             this.Controls.Add(this.label2);
@@ -162,6 +162,5 @@
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Label label4;
     }
 }
