@@ -5,11 +5,11 @@ namespace ClinicManagement
 {
     internal class PatientManager
     {
-        private static List<Patient> Patients;
+        private static List<Patient> _patients = new List<Patient>();
 
         public List<Patient> GetPatients()
         {
-            return Patients;
+            return new List<Patient>(_patients);
         }
 
         public Result AddPatient(Patient patient)
@@ -52,6 +52,13 @@ namespace ClinicManagement
 
         public Result DeletePatient(Patient patient)
         {
+            //TODO: Implement later
+            return Result.Ok();
+        }
+        internal static int GenerateNewId()
+        {
+            if (_patients.Count == 0)
+                return 1;
             if (Patients == null || !Patients.Contains(patient))
                 return Result.Failed("بیمار مورد نظر یافت نشد.");
 
@@ -121,6 +128,7 @@ namespace ClinicManagement
             //patient.Id = id;
 
              }
+            return _patients[_patients.Count - 1].Id + 1;
         }
 
     }

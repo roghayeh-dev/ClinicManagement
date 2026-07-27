@@ -32,7 +32,9 @@ namespace ClinicManagement
 
         private void dgvPatient_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == dgvPatient.Columns["ColDelete"].Index && e.RowIndex >= 0)
+            var p = new Patient("", "");
+
+            if (e.ColumnIndex == dgvPatient.Columns["ColDelete"].Index)
             {
                 DialogResult result = MessageBox.Show(
                     "آیا از حذف این بیمار مطمئن هستید؟",
@@ -69,6 +71,12 @@ namespace ClinicManagement
 
             dgvPatient.AutoGenerateColumns = false;
             dgvPatient.DataSource = patientManager.SearchPatient(txtSearch.Text);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            PatientManager patientManager = new PatientManager();
+            patientManager.GetPatients().Clear();
         }
     }
 }

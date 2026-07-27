@@ -5,19 +5,16 @@ namespace ClinicManagement
 {
     internal class DoctorManager
     {
-        private static List<Doctor> Doctors;
+        private static List<Doctor> _doctors = new List<Doctor>();
 
         public List<Doctor> GetDoctors()
         {
-            return Doctors;
+            return _doctors;
         }
 
         public void AddDoctor(Doctor Doctor)
         {
-            if (Doctors == null)
-                Doctors = new List<Doctor>();
-
-            Doctors.Add(Doctor);
+            _doctors.Add(Doctor);
         }
 
         public void EditDoctor(Doctor doctor, Doctor newDoctor)
@@ -33,9 +30,9 @@ namespace ClinicManagement
         }
             for (int i = 0; i < Doctors.Count; i++)
             {
-                if (Doctors[i].MedicalCouncilNumber == doctor.MedicalCouncilNumber)
+                if (_doctors[i].NezamPezeshki == doctor.NezamPezeshki)
                 {
-                    Doctors[i] = newDoctor;
+                    _doctors[i] = newDoctor;
                     break;
                 }
             }
@@ -58,10 +55,10 @@ namespace ClinicManagement
             return Result.Ok();
         public void RemoveDoctorByMedicalCouncilNumber(string medicalCouncilNumber)
         {
-            foreach (Doctor item in Doctors)
-                if (item.MedicalCouncilNumber == medicalCouncilNumber)
+            foreach (Doctor item in _doctors)
+                if (item.Id == id)
                 {
-                    Doctors.Remove(item);
+                    _doctors.Remove(item);
                     break;
                 }
             return Result.Ok();
@@ -91,6 +88,14 @@ namespace ClinicManagement
                 return 1;
             return doctors[doctors.Count - 1].Id + 1;
             return errors.ToArray();
+            return _doctors[_doctors.Count - 1].Id + 1;
+        }
+
+        internal static int GenerateNewId()
+        {
+            if (_doctors.Count == 0)
+                return 1;
+
             return _doctors[_doctors.Count - 1].Id + 1;
         }
     }

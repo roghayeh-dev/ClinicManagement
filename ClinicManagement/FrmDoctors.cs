@@ -14,6 +14,8 @@ namespace ClinicManagement
     {
         DoctorManager DoctorManager = new DoctorManager();
 
+        Doctor doctor;
+
         public FrmDoctors()
         {
             InitializeComponent();
@@ -21,6 +23,15 @@ namespace ClinicManagement
 
         private void FrmDoctors_Load(object sender, EventArgs e)
         {
+            //string firstName = doctor?.Bimar?.FirstName ?? "نام ثبت نشده";
+            //if (doctor != null && doctor.FirstName != null )
+            //{
+            //    firstName = doctor.FirstName;
+            //}
+            MessageBox.Show("firstName");
+
+
+
 
         }
 
@@ -42,8 +53,7 @@ namespace ClinicManagement
 
                 if (DialogResult.Yes != result)
                     return;
-
-                DoctorManager.RemoveDoctorByMedicalCouncilNumber(dgvDoctor.Rows[e.RowIndex].Cells[4].Value.ToString());
+                DoctorManager.RemoveDoctor(dgvDoctor.Rows[e.RowIndex].Cells[4].Value.ToString());
                 dgvDoctor.DataSource = DoctorManager.GetDoctors().ToList();
             }
 
@@ -51,9 +61,9 @@ namespace ClinicManagement
             {
                 Doctor doctor = null;
 
-                foreach(var dc in DoctorManager.GetDoctors())
+                foreach (var dc in DoctorManager.GetDoctors())
                 {
-                    if(dc.MedicalCouncilNumber == dgvDoctor.Rows[e.RowIndex].Cells[4].Value.ToString())
+                    if (dc.NezamPezeshki == dgvDoctor.Rows[e.RowIndex].Cells[4].Value.ToString())
                     {
                         doctor = dc;
                         break;

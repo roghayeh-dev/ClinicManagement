@@ -8,6 +8,10 @@ namespace ClinicManagement
 {
     public class Result
     {
+        private Result()
+        {
+
+        }
         public bool Success { get; private set; }
         public string Message { get; private set; }
         public static Result Failed(string msg)
