@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ClinicManagement
@@ -24,15 +18,11 @@ namespace ClinicManagement
         private void FrmDoctors_Load(object sender, EventArgs e)
         {
             //string firstName = doctor?.Bimar?.FirstName ?? "نام ثبت نشده";
-            //if (doctor != null && doctor.FirstName != null )
+            //if (doctor != null && doctor.FirstName != null)
             //{
             //    firstName = doctor.FirstName;
             //}
             MessageBox.Show("firstName");
-
-
-
-
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -41,7 +31,9 @@ namespace ClinicManagement
 
             frm.ShowDialog();
 
-            if (DoctorManager.GetDoctors() == null) return;
+            if (DoctorManager.GetDoctors() == null)
+                return;
+
             dgvDoctor.DataSource = DoctorManager.GetDoctors().ToList();
         }
 
@@ -49,11 +41,18 @@ namespace ClinicManagement
         {
             if (e.ColumnIndex == dgvDoctor.Columns["DeleteBtn"].Index)
             {
-                DialogResult result = MessageBox.Show("آیا از حذف مطمئن هستید؟", "Delete Doctor", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                DialogResult result = MessageBox.Show(
+                    "آیا از حذف مطمئن هستید؟",
+                    "Delete Doctor",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Error);
 
-                if (DialogResult.Yes != result)
+                if (result != DialogResult.Yes)
                     return;
-                DoctorManager.RemoveDoctor(dgvDoctor.Rows[e.RowIndex].Cells[4].Value.ToString());
+
+                DoctorManager.DeleteDoctor(
+                    dgvDoctor.Rows[e.RowIndex].Cells[4].Value.ToString());
+
                 dgvDoctor.DataSource = DoctorManager.GetDoctors().ToList();
             }
 
@@ -61,9 +60,10 @@ namespace ClinicManagement
             {
                 Doctor doctor = null;
 
-                foreach (var dc in DoctorManager.GetDoctors())
+                foreach (Doctor dc in DoctorManager.GetDoctors())
                 {
-                    if (dc.NezamPezeshki == dgvDoctor.Rows[e.RowIndex].Cells[4].Value.ToString())
+                    if (dc.medicalCouncilNumber ==
+                        dgvDoctor.Rows[e.RowIndex].Cells[4].Value.ToString())
                     {
                         doctor = dc;
                         break;
@@ -73,6 +73,7 @@ namespace ClinicManagement
                 FrmDoctor frm = new FrmDoctor(doctor);
 
                 frm.ShowDialog();
+
                 dgvDoctor.DataSource = DoctorManager.GetDoctors().ToList();
             }
         }

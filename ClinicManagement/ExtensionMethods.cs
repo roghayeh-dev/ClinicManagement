@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Globalization;
 using System.Text;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace ClinicManagement
 {
@@ -73,6 +75,37 @@ namespace ClinicManagement
             sb.Append(pc.GetDayOfMonth(date).ToString("00"));
 
             return sb.ToString();
+        }
+
+        public static bool IsMobileNumber(this string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                return false;
+
+            if (value.Length != 11)
+                return false;
+
+            if (!value.StartsWith("09"))
+                return false;
+
+            return value.All(char.IsDigit);
+        }
+
+        public static void ClearAllTextBoxes(this Control control)
+        {
+            // Recursive version.
+            foreach (Control item in control.Controls)
+            {
+                if (item is TextBox)
+                {
+                    item.Text = "";
+                }
+
+                if (item.HasChildren)
+                {
+                    item.ClearAllTextBoxes();
+                }
+            }
         }
     }
 }

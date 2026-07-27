@@ -63,8 +63,8 @@ namespace ClinicManagement
             //اطلاعات ردیفی که کاربر روی اون کلیک کرده رو میریزه توی تکس باکس ها
             txtUpdateFirstName.Text = selectedDoctor.FirstName;
             txtUpdateLastName.Text = selectedDoctor.LastName;
-            txtUpdateMedicalCouncilNumber.Text = selectedDoctor.MedicalCouncilNumber;
-            txtUpdateSpecialty.Text = selectedDoctor.Specialty;
+            txtUpdateMedicalCouncilNumber.Text = selectedDoctor.medicalCouncilNumber;
+            txtUpdateSpecialty.Text = selectedDoctor.FullSpecialties;
         }
 
         private void Update_Click(object sender, EventArgs e)
@@ -74,15 +74,41 @@ namespace ClinicManagement
             string lastName = txtUpdateLastName.Text.Trim();
             string specialty = txtUpdateSpecialty.Text.Trim();
 
-            var result = doctorManager.UpdateDoctor(medicalCouncilNumber, firstName, lastName, specialty);
+            Doctor oldDoctor = doctorManager
+                .GetDoctors()
+                .FirstOrDefault(d => d.medicalCouncilNumber == medicalCouncilNumber);
 
-            if (!result.Success)
+            if (oldDoctor == null)
             {
-                MessageBox.Show(result.Message, "خطا", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("پزشک یافت نشد.", "خطا",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            MessageBox.Show("اطلاعات پزشک با موفقیت ویرایش شد.", "موفقیت", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Doctor newDoctor = new Doctor(
+                medicalCouncilNumber,
+                firstName,
+                lastName);
+
+            newDoctor.Specialties = specialty.Split(',');
+
+            var result = doctorManager.EditDoctor(oldDoctor, newDoctor);
+
+            if (!result.Success)
+            {
+                MessageBox.Show(result.Message,
+                    "خطا",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            MessageBox.Show(
+                "اطلاعات پزشک با موفقیت ویرایش شد.",
+                "موفقیت",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+
             RefreshGrid();
         }
 

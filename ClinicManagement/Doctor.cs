@@ -7,12 +7,12 @@
         {
             Id = DoctorManager.GenerateNewId();
         }
-        public Doctor(string nezamPezeshki, string firstName, string lastName)
+        public Doctor(string medicalCouncilNumber, string firstName, string lastName)
             : this(firstName, lastName)
         {
-            NezamPezeshki = nezamPezeshki;
+            medicalCouncilNumber = medicalCouncilNumber;
         }
-        public string NezamPezeshki { get; set; }
+        public string medicalCouncilNumber { get; set; }
         public string[] Specialties { get; set; }
 
         public string FullSpecialties
@@ -31,7 +31,7 @@
                 return validate;
             }
 
-            if (string.IsNullOrEmpty(NezamPezeshki) || NezamPezeshki.Length < 3)
+            if (string.IsNullOrEmpty(medicalCouncilNumber) || medicalCouncilNumber.Length < 3)
             {
                 return Result.Failed("نظام پزشکی نامعتبر");
             }

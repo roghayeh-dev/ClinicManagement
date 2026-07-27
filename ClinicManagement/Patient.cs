@@ -8,22 +8,6 @@
             Id = PatientManager.GenerateNewId();
         }
 
-
-        //public Patient(string firstName, string lastName)
-        //{
-        //    FirstName = firstName;
-        //    LastName = lastName;
-        //}
-        public int Id { get; set; }
-        public string FirstName { get;  set; }
-        public string LastName { get;  set; }
-        public string FullName
-        {
-            get
-            {
-                return FirstName + " " + LastName;
-            }
-        }
         private string nationalCode;
 
         public string NationalCode
@@ -37,6 +21,7 @@
         public override Result Validate()
         {
             var validate = base.Validate();
+
             if (!validate.Success)
             {
                 return validate;
@@ -47,7 +32,7 @@
                 return Result.Failed("کدملی نامعتبر");
             }
 
-            if (string.IsNullOrEmpty(MobileNumber) || MobileNumber.Length != 11)
+            if (!MobileNumber.IsMobileNumber())
             {
                 return Result.Failed("شماره موبایل نامعتبر");
             }

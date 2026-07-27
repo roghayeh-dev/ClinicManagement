@@ -119,16 +119,7 @@
             this.richTextBox1.TabIndex = 3;
             this.richTextBox1.Text = "";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(219, 225);
-            this.label4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(80, 24);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "تخصص ها";
+            
             // 
             // FrmDoctor
             // 

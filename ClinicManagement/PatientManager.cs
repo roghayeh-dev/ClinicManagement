@@ -18,20 +18,20 @@ namespace ClinicManagement
             if (!validate.Success)
                 return validate;
 
-            if (Patients == null)
-                Patients = new List<Patient>();
+            if (_patients == null)
+                _patients = new List<Patient>();
 
-            int c = Patients.Count;
+            int c = _patients.Count;
             int id;
-            if (Patients.Count > 0)
-                id = Patients[c - 1].Id;
+            if (_patients.Count > 0)
+                id = _patients[c - 1].Id;
             else
                 id = 0;
 
             id++;
             patient.Id = id;
 
-            Patients.Add(patient);
+            _patients.Add(patient);
             return Result.Ok();
         }
 
@@ -41,37 +41,38 @@ namespace ClinicManagement
         //    var validate = patient.Validate();
         //    if (!validate.Success)
         //        return validate;
-        //    if (Patients == null)
-        //        Patients = new List<Patient>();
+        //    if (_patients == null)
+        //        _patients = new List<Patient>();
         //  //  string error = ValidatePatient(patient);
         //   // if (error != null)
         //        return Result.Failed("خطایی رخ داد");
-        //   // Patients.Add(patient);
+        //   // _patients.Add(patient);
         //    //return null;
         //}
 
         public Result DeletePatient(Patient patient)
         {
-            //TODO: Implement later
+            if (_patients == null || !_patients.Contains(patient))
+                return Result.Failed("بیمار مورد نظر یافت نشد.");
+
+            _patients.Remove(patient);
             return Result.Ok();
         }
+
         internal static int GenerateNewId()
         {
             if (_patients.Count == 0)
                 return 1;
-            if (Patients == null || !Patients.Contains(patient))
-                return Result.Failed("بیمار مورد نظر یافت نشد.");
 
-            Patients.Remove(patient);
-            return Result.Ok();
+            return _patients[_patients.Count - 1].Id + 1;
         }
 
         public List<Patient> SearchPatient(string searchText)
         {
-            if (Patients == null)
+            if (_patients == null)
                 return new List<Patient>();
 
-            return Patients
+            return _patients
                 .Where(p =>
                     p.FirstName.Contains(searchText) ||
                     p.LastName.Contains(searchText) ||
@@ -114,21 +115,18 @@ namespace ClinicManagement
             }
 
             return Result.Ok();
-        
-           // return null;
-            //int c = Patients.Count;
+
+            // return null;
+            //int c = _patients.Count;
             //int id;
-            //if (Patients.Count > 0)
-            //    id = Patients[c - 1].Id;
+            //if (_patients.Count > 0)
+            //    id = _patients[c - 1].Id;
             //else
             //    id = 0;
 
             //id++;
 
             //patient.Id = id;
-
-             }
-            return _patients[_patients.Count - 1].Id + 1;
         }
-
     }
+}

@@ -43,5 +43,9 @@ namespace ClinicManagement
             ChangeLablesColorToRed(this.Controls);
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.ClearAllTextBoxes();
+        }
     }
 }

@@ -24,7 +24,6 @@ namespace ClinicManagement
         public FrmDoctor()
         {
             InitializeComponent();
-            _doctor = doctor;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -74,7 +73,7 @@ namespace ClinicManagement
             {
                 txtName.Text = _doctor.FirstName;
                 txtLastName.Text = _doctor.LastName;
-                txtMedicalCouncilNumber.Text = _doctor.NezamPezeshki;
+                txtMedicalCouncilNumber.Text = _doctor.medicalCouncilNumber;
                 richTextBox1.Text = string.Join(Environment.NewLine, _doctor.Specialties);
             }
         }

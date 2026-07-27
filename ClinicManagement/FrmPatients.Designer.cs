@@ -37,7 +37,7 @@
             this.ColEdit = new System.Windows.Forms.DataGridViewButtonColumn();
             this.ColDelete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            //this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
@@ -178,7 +178,7 @@
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
+       //     this.Controls.Add(this.button1);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.dgvPatient);
             this.Name = "FrmPatients";
