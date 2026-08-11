@@ -23,6 +23,8 @@ namespace ClinicManagement
             //    firstName = doctor.FirstName;
             //}
             MessageBox.Show("firstName");
+
+
         }
 
         private void btnAdd_Click(object sender, EventArgs e)

@@ -78,5 +78,11 @@ namespace ClinicManagement
             PatientManager patientManager = new PatientManager();
             patientManager.GetPatients().Clear();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            PatientManager patientManager = new PatientManager();
+            patientManager.GetPatients().Clear();
+        }
     }
 }
