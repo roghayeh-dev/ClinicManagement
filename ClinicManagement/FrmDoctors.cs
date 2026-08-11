@@ -37,7 +37,6 @@ namespace ClinicManagement
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            doctor = new Doctor("");
             FrmDoctor frm = new FrmDoctor();
 
             frm.ShowDialog();

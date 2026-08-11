@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ClinicManagement
@@ -18,12 +11,6 @@ namespace ClinicManagement
         }
         private void FrmStarter_Load(object sender, EventArgs e)
         {
-            //var doctor = new Doctor("123456");
-
-
-            var doctor2 = new Doctor("123456", "14655");
-
-
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -39,6 +26,14 @@ namespace ClinicManagement
             frm.Show();
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            int i = textBox1.Text.ToInt();
 
+
+            var today = DateTime.Now.ToShamsiDate();
+
+            MessageBox.Show(today);
+        }
     }
 }

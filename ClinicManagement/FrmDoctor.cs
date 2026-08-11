@@ -50,7 +50,7 @@ namespace ClinicManagement
                 this.Close();
             }
 
-            Doctor doctor = new Doctor(txtMedicalCouncilNumber.Text);
+            Doctor doctor = new Doctor(txtMedicalCouncilNumber.Text,"","");
             doctor.FirstName = txtName.Text;
             doctor.LastName = txtLastName.Text;
             //int[] numbers = { 3, 4, 7, 9 };

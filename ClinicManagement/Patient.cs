@@ -1,24 +1,13 @@
-﻿using System;
-
-namespace ClinicManagement
+﻿namespace ClinicManagement
 {
-    public class Patient
+    public sealed class Patient : Person
     {
-        //public Patient(string firstName, string lastName)
-        //{
-        //    FirstName = firstName;
-        //    LastName = lastName;
-        //}
-        public int Id { get; set; }
-        public string FirstName { get;  set; }
-        public string LastName { get;  set; }
-        public string FullName
+        public Patient(string firstName, string lastName)
+            : base(firstName, lastName)
         {
-            get
-            {
-                return FirstName + " " + LastName;
-            }
+            Id = PatientManager.GenerateNewId();
         }
+
         private string nationalCode;
 
         public string NationalCode
@@ -29,15 +18,26 @@ namespace ClinicManagement
 
         public string MobileNumber { get; set; }
 
-        public Result Validate()
+        public override Result Validate()
         {
-            if (NationalCode.Length != 10)
+            var validate = base.Validate();
+
+            if (!validate.Success)
+            {
+                return validate;
+            }
+
+            if (!NationalCode.IsNationalCode())
             {
                 return Result.Failed("کدملی نامعتبر");
             }
 
+            if (string.IsNullOrEmpty(MobileNumber) || MobileNumber.Length != 11)
+            {
+                return Result.Failed("شماره موبایل نامعتبر");
+            }
+
             return Result.Ok();
         }
-
     }
 }

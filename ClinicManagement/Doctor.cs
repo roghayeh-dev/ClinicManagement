@@ -1,42 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ClinicManagement
+﻿namespace ClinicManagement
 {
-    using System;
-
-    public class Doctor
+    public class Doctor : Person
     {
-            public Doctor(string medicalCouncilNumber)
-            {
-            MedicalCouncilNumber = medicalCouncilNumber;
+        private Doctor(string firstName, string lastName)
+            : base(firstName, lastName)
+        {
+            Id = DoctorManager.GenerateNewId();
         }
-        public Doctor(string nezamPezeshki) : this()
+
+        public Doctor(string nezamPezeshki, string firstName, string lastName)
+            : this(firstName, lastName)
         {
             NezamPezeshki = nezamPezeshki;
-
         }
-        public Doctor(string firstName, string lastName) : this("")
-        {
-            FirstName = firstName;
-            LastName = lastName;
-        }
-        public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
 
-            public string FullName
-            {
-                get { return FirstName + " " + LastName; }
-            }
+        public string NezamPezeshki { get; set; }
 
-        public string MedicalCouncilNumber { get; set; }
         public string[] Specialties { get; set; }
 
-            public string Specialty { get; set; }
+        public string FullSpecialties
+        {
+            get
+            {
+                return string.Join(", ", Specialties);
+            }
+        }
+
+        public override Result Validate()
+        {
+            var validate = base.Validate();
+
+            if (!validate.Success)
+            {
+                return validate;
+            }
+
+            if (string.IsNullOrEmpty(NezamPezeshki) || NezamPezeshki.Length < 3)
+            {
+                return Result.Failed("نظام پزشکی نامعتبر");
+            }
+
+            if ((Specialties?.Length ?? 0) == 0)
+            {
+                return Result.Failed("تخصص پزشک وارد نشده");
+            }
+
+            return Result.Ok();
+        }
     }
 }
-

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace ClinicManagement
@@ -16,7 +13,6 @@ namespace ClinicManagement
 
         private void FrmPatient_Load(object sender, EventArgs e)
         {
-
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -25,6 +21,7 @@ namespace ClinicManagement
             frm.ShowDialog();
 
             PatientManager patientManager = new PatientManager();
+
             dgvPatient.AutoGenerateColumns = false;
             dgvPatient.DataSource = null;
             dgvPatient.DataSource = patientManager.GetPatients().ToList();
@@ -42,33 +39,39 @@ namespace ClinicManagement
 
                 if (result == DialogResult.Yes)
                 {
-                    Patient patient = (Patient)dgvPatient.Rows[e.RowIndex].DataBoundItem;
+                    Patient patient =
+                        (Patient)dgvPatient.Rows[e.RowIndex].DataBoundItem;
 
                     PatientManager patientManager = new PatientManager();
+
                     Result resultD = patientManager.DeletePatient(patient);
 
                     if (resultD.Success)
                     {
                         dgvPatient.AutoGenerateColumns = false;
                         dgvPatient.DataSource = null;
-                        dgvPatient.DataSource = patientManager.GetPatients().ToList();
+                        dgvPatient.DataSource =
+                            patientManager.GetPatients().ToList();
                     }
                     else
                     {
-                        MessageBox.Show(resultD.Message, "خطا", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(
+                            resultD.Message,
+                            "خطا",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
                     }
                 }
             }
         }
-
-       
 
         private void btnSearch_Click_1(object sender, EventArgs e)
         {
             PatientManager patientManager = new PatientManager();
 
             dgvPatient.AutoGenerateColumns = false;
-            dgvPatient.DataSource = patientManager.SearchPatient(txtSearch.Text);
+            dgvPatient.DataSource =
+                patientManager.SearchPatient(txtSearch.Text);
         }
     }
 }

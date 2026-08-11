@@ -1,91 +1,77 @@
-﻿using ClinicManagement.ClinicManagement;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClinicManagement
 {
     internal class DoctorManager
     {
-        private static List<Doctor> doctors;
+        private static List<Doctor> _doctors = new List<Doctor>();
 
         public List<Doctor> GetDoctors()
         {
-            if (doctors == null)
-                doctors = new List<Doctor>();
-
-            return doctors;
+            return _doctors;
         }
 
-        public Result ValidateDoctor(Doctor doctor)
+        public void AddDoctor(Doctor doctor)
         {
-            if (string.IsNullOrWhiteSpace(doctor.MedicalCouncilNumber))
-                return Result.Failed("شماره نظام پزشکی نمی‌تواند خالی باشد.");
-
-            if (doctor.MedicalCouncilNumber.Length != 5)
-                return Result.Failed("شماره نظام پزشکی باید ۵ رقم باشد.");
-
-            if (!doctor.MedicalCouncilNumber.All(char.IsDigit))
-                return Result.Failed("شماره نظام پزشکی باید فقط شامل عدد باشد.");
-
-            return Result.Ok();
+            _doctors.Add(doctor);
         }
 
-        public Result AddDoctor(Doctor doctor)
+        public void EditDoctor(Doctor doctor, Doctor newDoctor)
         {
-            var validate = ValidateDoctor(doctor);
-            if (!validate.Success)
-                return validate;
-
-            if (doctors == null)
-                doctors = new List<Doctor>();
-
-            doctors.Add(doctor);
-            return Result.Ok();
+            for (int i = 0; i < _doctors.Count; i++)
+            {
+                if (_doctors[i].NezamPezeshki == doctor.NezamPezeshki)
+                {
+                    _doctors[i] = newDoctor;
+                    break;
                 }
             }
         }
 
-        public Result DeleteDoctor(string medicalCouncilNumber)
+        public void RemoveDoctor(string nezamPezeshki)
+        {
+            foreach (Doctor item in _doctors)
+            {
+                if (item.NezamPezeshki == nezamPezeshki)
                 {
-            if (string.IsNullOrWhiteSpace(medicalCouncilNumber))
-                return Result.Failed("شماره نظام پزشکی نمی‌تواند خالی باشد.");
-
-            if (doctors == null)
-                doctors = new List<Doctor>();
-
-            Doctor doctor = doctors.FirstOrDefault(d => d.MedicalCouncilNumber == medicalCouncilNumber);
-
-            if (doctor == null)
-                return Result.Failed("پزشکی با این شماره نظام پزشکی یافت نشد.");
-
-            doctors.Remove(doctor);
-            return Result.Ok();
+                    _doctors.Remove(item);
+                    break;
+                }
+            }
         }
 
-        public Result UpdateDoctor(string medicalCouncilNumber, string firstName, string lastName, string specialty)
+        public void RemoveDoctor(int id)
         {
-            if (doctors == null)
-                doctors = new List<Doctor>();
+            foreach (Doctor item in _doctors)
+            {
+                if (item.Id == id)
+                {
+                    _doctors.Remove(item);
+                    break;
+                }
+            }
+        }
 
-            Doctor doctor = doctors.FirstOrDefault(d => d.MedicalCouncilNumber == medicalCouncilNumber);
-
-            if (doctor == null)
-                return Result.Failed("پزشکی با این شماره نظام پزشکی یافت نشد.");
+        public string[] Validation(
+            string firstName,
+            string lastName,
+            string medicalCouncilNumber)
+        {
+            List<string> errors = new List<string>();
 
             if (string.IsNullOrWhiteSpace(firstName))
-                return Result.Failed("نام پزشک نمی‌تواند خالی باشد.");
+                errors.Add("نام اجباری است");
 
             if (string.IsNullOrWhiteSpace(lastName))
-                return Result.Failed("نام خانوادگی پزشک نمی‌تواند خالی باشد.");
+                errors.Add("نام خانوادگی اجباری است");
 
-            doctor.FirstName = firstName;
-            doctor.LastName = lastName;
-            doctor.Specialty = specialty;
+            if (string.IsNullOrWhiteSpace(medicalCouncilNumber))
+                errors.Add("کد نظام پزشکی اجباری است");
+            else if (medicalCouncilNumber.Length < 3)
+                errors.Add("کد نظام پزشکی باید ۳ رقم باشد");
 
-            return Result.Ok();
+            return errors.ToArray();
         }
 
         internal static int GenerateNewId()
